@@ -1,0 +1,75 @@
+package secret_message;
+import java.util.Scanner;
+import java.util.Random;
+public class Secret_message {
+
+    public static void main(String[] args) {
+       
+       Scanner cin = new Scanner(System.in);
+       Random rand = new Random();
+       String abc = "abcdefghijklmnopqrstuvwxyz ";
+       boolean all_letters= false;
+       String decode = new String(), code = new String(), user = new String(), key2 = new String(); 
+       
+       while(all_letters == false){
+           boolean checks= false;
+           System.out.println("Please enter the key phrase(LOWERCASE ONLY) ");
+           user = cin.nextLine();
+           int count =0;
+           for (int i = 0; i<abc.length(); i++){      
+               for(int n=0; n<user.length(); n++){
+                   
+                   if((abc.substring(i,i+1)).equals(user.substring(n,n+1)) & user.length()>=27){
+                       checks=true;
+                    }  
+                }
+               if(checks==true){
+                   count++;
+                   }
+           }
+           if(count>=26){
+               all_letters=true;
+               System.out.println("Valid key phrase");
+                String encoded = "", ans = "";
+		         String first_p="";
+		         String pair1="";
+		         String pair2="";
+		         int pos=0;
+		        
+		         String key = "0000000000111111111122222222223333333333444444444455";
+		        
+		         String keys = "0123456789012345678901234567890123456789012345678901";
+		         String letters= user;
+		         System.out.println("Please enter the coded message");
+		         System.out.print("Please DO NOT include spaces: ");
+		         encoded = cin.nextLine();
+		        
+		         for(int k=0; k<encoded.length()/2; k+=1){
+		
+		            first_p = encoded.substring(pos,pos+2);
+		            
+		            pair1 = first_p.substring(0,1);
+		            pair2 = first_p.substring(1,2);
+		            
+		            for(int n=0; n<key.length(); n++){
+		                
+		                if(key.substring(n,n+1).equals(pair1) && keys.substring(n,n+1).equals(pair2)){
+		                    ans = ans+ letters.charAt(n);
+		                }
+		            }
+		            pos = pos + 2;
+		        }
+        
+        	System.out.println("The decoded message is: "+ ans);
+        	all_letters=true;  		
+           		}
+           
+           
+           else{
+               System.out.println("Invalid");
+            }
+       }
+    
+    }
+}
+  
